@@ -17,7 +17,7 @@ namespace AgendaDeTarefasAtt.Models
         public string Descricaotarefa { get; set; }
 
         [Required(ErrorMessage ="A Data é obrigatório")]
-        public int Data { get; set; }
+        public DateTime Data { get; set; }
 
         [Required(ErrorMessage ="Digite a hora de incicio da tarefa")]
         public int Horainicio { get; set; }

@@ -9,6 +9,7 @@ namespace AgendaDeTarefasAtt.Repositorio
         List<TarefaModel> BuscarTodos();
         TarefaModel Adicionar(TarefaModel tarefa);
         TarefaModel Atualizar(TarefaModel tarefa);
+        bool VerificaSobreposto(TarefaModel tarefa);
         bool Deletar(int id);
     }
 }

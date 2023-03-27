@@ -72,8 +72,32 @@ namespace AgendaDeTarefasAtt.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    _tarefaRepositorio.Adicionar(tarefa);
-                    TempData["MensagemSucesso"] = "Tarefa cadastrada com sucesso";
+                    if (tarefa.Data.Date < DateTime.Now.Date)
+                    {
+                        TempData["MensagemErro"] = "Não permitir o cadastramento de tarefas com início no passado!";
+                       
+                    }
+                    else if (tarefa.Horainicio > tarefa.Horafim)
+                    {
+                        TempData["MensagemErro"] = "Hora inicio não pode ser maior que hora fim!";
+                    }
+                    else 
+                    if (tarefa.Horafim - tarefa.Horainicio > 5)
+                    {
+                        TempData["MensagemErro"] = "Ops, o tempo máximo da tarefa cadastrada é de apenas 5 horas!";
+                       
+                    }
+                    else if (_tarefaRepositorio.VerificaSobreposto(tarefa))
+                    {
+                        TempData["MensagemErro"] = "Erro! Tempo sobreposto!";
+                    }
+                    
+                    else
+                    {
+                        _tarefaRepositorio.Adicionar(tarefa);
+                        TempData["MensagemSucesso"] = "Tarefa cadastrada com sucesso";
+                    }
+                    
                     return RedirectToAction("Index");
                 }
 
@@ -95,8 +119,29 @@ namespace AgendaDeTarefasAtt.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    _tarefaRepositorio.Atualizar(tarefa);
-                    TempData["MensagemSucesso"] = "Tarefa alterada com sucesso";
+                    if (tarefa.Data.Date < DateTime.Now.Date)
+                    {
+                        TempData["MensagemErro"] = "Não permitir a alteração de tarefas com início no passado!";
+
+                    }
+
+                    else if (tarefa.Horainicio > tarefa.Horafim)
+                    {
+                        TempData["MensagemErro"] = "Hora inicio não pode ser maior que hora fim!";
+                    }
+
+                    else
+                  if (tarefa.Horafim - tarefa.Horainicio > 5)
+                    {
+                        TempData["MensagemErro"] = "Ops, o tempo máximo da tarefa cadastrada é de apenas 5 horas!";
+
+                    }
+                    else
+                    {
+                        _tarefaRepositorio.Atualizar(tarefa);
+                        TempData["MensagemSucesso"] = "Tarefa alterada com sucesso";
+                    }
+                    
                     return RedirectToAction("Index");
                 }
 

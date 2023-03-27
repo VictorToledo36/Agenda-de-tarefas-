@@ -21,6 +21,14 @@ namespace AgendaDeTarefasAtt.Repositorio
             return _bancoContext.Tarefas.ToList();
         }
 
+        public bool VerificaSobreposto(TarefaModel tarefa)
+        {
+            return _bancoContext.Tarefas.Any(x => tarefa.Data == x.Data &&
+                                                   ((tarefa.Horainicio >= x.Horainicio && tarefa.Horainicio < x.Horafim) ||
+                                                  (tarefa.Horafim <= x.Horafim && tarefa.Horafim > x.Horainicio)));
+        }
+
+
         public TarefaModel Adicionar(TarefaModel tarefa)
         {
             _bancoContext.Tarefas.Add(tarefa);
