@@ -1,0 +1,79 @@
+﻿@model List<TarefaModel>
+@{
+    ViewData["Title"] = "Listagem de Tarefas";
+}
+
+<div class="text-center">
+
+   <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+        <a class="btn btn-primary" role="button" asp-controller="Tarefa" asp-action="Adicionar">Adicionar nova tarefa</a>
+   </div>
+
+    <br />
+
+    @if (TempData["MensagemSucesso"] != null)
+    {
+         <div class="alert alert-success" role="alert">
+                <button type="button" class="btn btn-danger btn-sm close-alert" arial-label="Close">X</button>
+                 @TempData["MensagemSucesso"]
+         </div>
+    }
+
+    @if (TempData["MensagemErro"] != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            <button type="button" class="btn btn-danger btn-sm close-alert" arial-label="Close">X</button>
+            @TempData["MensagemErro"]
+        </div>
+    }
+
+    <br />
+
+    <h1 class="display-4">Listagem de tarefas</h1>
+
+    <table class="table" id="table-tarefas">
+        <thead>
+             <tr>
+                <th scope="col">#</th>
+                <th scope="col">Titulo Tarefa</th>
+                <th scope="col">Descrição Tarefa</th>
+                <th scope="col">Data</th>
+                <th scope="col">Hora Inicio</th>
+                <th scope="col">Hora Finalização</th>
+                <th scope="col">Prioridade</th>
+                <th scope="col">Tarefa Finalizada</th>
+             </tr>
+        </thead>
+         <tbody>
+             @if (Model != null && Model.Any())
+             {
+                  foreach (TarefaModel tarefa in Model)
+                  {
+                        <tr>
+                            <th scope="row">@tarefa.Id</th>
+                            <td>@tarefa.Titulotarefa</td>
+                            <td>@tarefa.Descricaotarefa</td>
+                            <td>@tarefa.Data</td>
+                            <td>@tarefa.Horainicio</td>
+                            <td>@tarefa.Horafim</td>
+                            <td>@tarefa.Prioridade</td>
+                            <td>@tarefa.Tarefafinalizada</td>
+
+                            <td>
+                                <div class="btn-group" role="group">
+                                    <a role="button" class="btn btn-primary" asp-route-id="@tarefa.Id" asp-controller="Tarefa" asp-action="Editar">Editar</a>
+                                    <a role="button" class="btn btn-danger" asp-route-id="@tarefa.Id" asp-controller="Tarefa" asp-action="Apagar">Apagar</a>
+
+                                </div>
+                            </td>
+                        </tr>
+                  }
+             }
+            else
+            {
+                <tr class="odd"><td valign="top" colspan= "8">Nenhuma tarefa encontrada</td></tr>        
+            }
+
+        </tbody>
+    </table>
+</div>

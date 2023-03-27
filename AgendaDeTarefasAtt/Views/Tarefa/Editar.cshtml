@@ -1,0 +1,60 @@
+﻿@model TarefaModel
+@{
+    ViewData["Title"] = "Editar Tarefas";
+}
+
+<div class="text-center">
+
+    <h1 class="display-4">Editar Tarefas</h1>
+
+</div>
+
+<form asp-controller="Tarefa" asp-action="Alterar" method="post">
+
+    <input type="hidden" asp-for="Id"/>
+    <div class="form-group">
+        <label for="Tituto Tarefa">Titulo tarefa</label>
+        <input type="text" asp-for="Titulotarefa" class="form-control" placeholder="Digite o titulo da tarefa:">
+        @Html.ValidationMessageFor(x => x.Titulotarefa)
+    </div>
+
+    <div class="form-group">
+        <label for="Descrição Tarefa">Descrição Tarefa</label>
+        <input type="text" asp-for="Descricaotarefa" class="form-control" placeholder="Digite a descrição da tarefa:">
+        @Html.ValidationMessageFor(x => x.Descricaotarefa)
+    </div>
+
+    <div class="form-group">
+        <label for="Data">Data</label>
+        <input type="text" asp-for="Data" class="form-control" placeholder="Digite a data de inicio:">
+        @Html.ValidationMessageFor(x => x.Data)
+    </div>
+
+    <div class="form-group">
+        <label for="Hora inicio">Hora inicio</label>
+        <input type="text" asp-for="Horainicio" class="form-control" placeholder="Digite a hora de inicio:">
+        @Html.ValidationMessageFor(x => x.Horainicio)
+    </div>
+
+    <div class="form-group">
+        <label for="Hora finalização">Hora finalização</label>
+        <input type="text" asp-for="Horafim" class="form-control" placeholder="Digite a hora de finalização:">
+        @Html.ValidationMessageFor(x => x.Horafim)
+    </div>
+
+    <div class="form-group">
+        <label for="Prioridade">Prioridade</label>
+        <input type="text" asp-for="Prioridade" class="form-control" placeholder="Digite a sua prioridade:">
+        @Html.ValidationMessageFor(x => x.Prioridade)
+    </div>
+
+    <div class="form-group">
+        <label for="Tarefa Finalizada">Tarefa finalizada</label>
+        <input type="text" asp-for="Tarefafinalizada" class="form-control" placeholder="Digite se a tarefa foi finalizada">
+        @Html.ValidationMessageFor(x => x.Tarefafinalizada)
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">Alterar</button>
+    <a class="btn btn-secondary" asp-controller="Tarefa" asp-action="Index" role="button">Voltar</a>
+</form>
